@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="700" viewBox="0 0 900 700">
+  <rect width="900" height="700" fill="#EFE9DD"/>
+  <rect x="0" y="0" width="900" height="700" fill="none" stroke="#1F3D2B" stroke-width="2"/>
+  <text x="450" y="340" font-family="Georgia, serif" font-size="34" fill="#1F3D2B" text-anchor="middle">FOTO: GETRÄNKE</text>
+  <text x="450" y="380" font-family="Arial, sans-serif" font-size="18" fill="#5b6355" text-anchor="middle">Platzhalter — bitte eigenes Foto einsetzen</text>
+</svg>

@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Queen's — Kneipe im Kiez</title>
+  <meta name="description" content="Queen's — Kneipe mit Billiard, Jukebox und Kiez-Flair. Ab 18, Raucherlokal.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Header / Navigation -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#top" class="logo"><img src="images/queens-logo.png" alt="Queen's" class="logo-img"></a>
+
+      <nav class="main-nav" id="main-nav">
+        <a href="#ueber-uns" data-i18n="nav_about">Über uns</a>
+        <a href="#highlights" data-i18n="nav_highlights">Highlights</a>
+        <a href="#atmosphaere" data-i18n="nav_gallery">Atmosphäre</a>
+        <a href="#oeffnungszeiten" data-i18n="nav_hours">Öffnungszeiten</a>
+        <a href="#anfahrt" data-i18n="nav_anfahrt">Anfahrt</a>
+        <a href="#kiez-blog" data-i18n="nav_blog">Kiez-Blog</a>
+        <a href="#kontakt" data-i18n="nav_contact">Kontakt</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="social-links" aria-label="Social Media">
+          <a href="#" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2c2.72 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.15.55.55.9 1.11 1.15 1.77.25.64.42 1.37.47 2.43.05 1.06.06 1.4.06 4.12s-.01 3.06-.06 4.12c-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.15 1.77 4.9 4.9 0 0 1-1.77 1.15c-.64.25-1.37.42-2.43.47-1.06.05-1.4.06-4.12.06s-3.06-.01-4.12-.06c-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.15 4.9 4.9 0 0 1-1.15-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.72 2 12s.01-3.06.06-4.12c.05-1.06.22-1.79.47-2.43.26-.66.6-1.22 1.15-1.77A4.9 4.9 0 0 1 5.45.53C6.09.28 6.82.11 7.88.06 8.94.01 9.28 0 12 0Zm0 5.35A6.65 6.65 0 1 0 12 18.65 6.65 6.65 0 0 0 12 5.35Zm0 10.97A4.32 4.32 0 1 1 12 7.68a4.32 4.32 0 0 1 0 8.64Zm6.9-11.2a1.56 1.56 0 1 1-3.12 0 1.56 1.56 0 0 1 3.12 0Z"/></svg>
+          </a>
+          <a href="#" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.5 1.49-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.9h-2.34V22c4.78-.8 8.44-4.94 8.44-9.94Z"/></svg>
+          </a>
+        </div>
+        <button class="lang-toggle" id="lang-toggle" aria-label="Sprache wechseln">DE / EN</button>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Menü öffnen" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-media">
+        <video class="hero-media__video" autoplay muted loop playsinline poster="images/photo-bar-neon.jpg">
+          <source src="images/queens-video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+      </div>
+
+      <div class="hero-wordmark" aria-hidden="true">QUEEN'S</div>
+
+      <div class="ticket-stub" aria-hidden="true">
+        <span>Ab 18</span><span>•</span><span>Raucherlokal</span>
+      </div>
+
+      <div class="container hero-content">
+        <div class="badges hero-anim hero-anim--1">
+          <span class="badge" data-i18n="badge_18">Ab 18</span>
+          <span class="badge" data-i18n="badge_smoking">Raucherlokal</span>
+        </div>
+        <h1 class="hero-anim hero-anim--2" data-i18n="hero_title">Queen's</h1>
+        <p class="lead hero-anim hero-anim--3" data-i18n="hero_subtitle">Kaltes Bier, gute Musik, Billiard bis spät. Deine Kneipe im Kiez.</p>
+        <div class="hero-cta hero-anim hero-anim--4">
+          <a href="#kontakt" class="btn btn--primary" data-i18n="hero_cta">Tisch reservieren</a>
+          <a href="#ueber-uns" class="btn btn--ghost" data-i18n="hero_cta_secondary">Mehr erfahren</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Laufband -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span data-i18n="badge_18">Ab 18</span><span>·</span><span data-i18n="badge_smoking">Raucherlokal</span><span>·</span>
+        <span data-i18n="highlight_billiard_title">Billiard</span><span>·</span><span data-i18n="highlight_jukebox_title">Jukebox</span><span>·</span>
+        <span data-i18n="badge_18">Ab 18</span><span>·</span><span data-i18n="badge_smoking">Raucherlokal</span><span>·</span>
+        <span data-i18n="highlight_billiard_title">Billiard</span><span>·</span><span data-i18n="highlight_jukebox_title">Jukebox</span><span>·</span>
+      </div>
+    </div>
+
+    <!-- Über uns -->
+    <section id="ueber-uns" class="section section--about">
+      <div class="about-grid">
+        <div class="about-media reveal">
+          <img src="images/photo-storefront.jpg" alt="Queen's Fassade in Schöneberg">
+        </div>
+        <div class="about-copy reveal">
+          <span class="about-quotemark" aria-hidden="true">“</span>
+          <p class="eyebrow" data-i18n="about_eyebrow">Über uns</p>
+          <h2 data-i18n="about_title">Eine Institution im Kiez</h2>
+          <p data-i18n="about_text">
+            Queen's ist mehr als eine Kneipe — es ist ein zweites Wohnzimmer für alle,
+            die gutes Bier, ehrliche Gespräche und die richtige Playlist zu schätzen wissen.
+            Bei uns triffst du Nachbarn, Stammgäste und alle, die den Kiez lieben.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Highlights -->
+    <section id="highlights" class="section section--highlights">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow" data-i18n="highlights_eyebrow">Bei uns erwartet dich</p>
+          <h2 data-i18n="highlights_title">Highlights</h2>
+        </div>
+
+        <div class="highlight-tabs" role="tablist">
+          <button type="button" class="highlight-tab reveal" role="tab" aria-expanded="false"
+                  data-img="images/photo-billiard-table.jpg" data-title="highlight_billiard_title" data-desc="highlight_billiard_text">
+            <span class="highlight-index" aria-hidden="true">01</span>
+            <span class="highlight-tab-title" data-i18n="highlight_billiard_title">Billiard</span>
+          </button>
+          <button type="button" class="highlight-tab reveal" role="tab" aria-expanded="false"
+                  data-img="images/photo-band.jpg" data-title="highlight_jukebox_title" data-desc="highlight_jukebox_text">
+            <span class="highlight-index" aria-hidden="true">02</span>
+            <span class="highlight-tab-title" data-i18n="highlight_jukebox_title">Jukebox</span>
+          </button>
+          <button type="button" class="highlight-tab reveal" role="tab" aria-expanded="false"
+                  data-img="images/photo-guinness.jpg" data-title="highlight_drinks_title" data-desc="highlight_drinks_text">
+            <span class="highlight-index" aria-hidden="true">03</span>
+            <span class="highlight-tab-title" data-i18n="highlight_drinks_title">Getränke</span>
+          </button>
+        </div>
+
+        <div class="highlight-panel-wrap" id="highlight-panel-wrap">
+          <div class="highlight-panel">
+            <div class="highlight-panel-inner">
+              <img id="highlight-panel-img" src="" alt="">
+              <div class="highlight-panel-text">
+                <h3 id="highlight-panel-title"></h3>
+                <p id="highlight-panel-desc"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Poster-Zitat -->
+    <section class="section section--poster">
+      <div class="poster-wordmark" aria-hidden="true">QUEEN'S</div>
+      <div class="container narrow">
+        <blockquote class="poster-quote reveal" data-i18n="poster_quote">
+          „Kein Schnickschnack. Nur kaltes Bier, ein sauberer Billardtisch und gute Nachbarn.“
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- Atmosphäre-Galerie: scroll-gekoppeltes, versetztes Bilderband -->
+    <section id="atmosphaere" class="section section--gallery">
+      <div class="gallery-pin" id="gallery-pin">
+        <div class="gallery-sticky">
+          <div class="section-head reveal gallery-head">
+            <p class="eyebrow" data-i18n="gallery_eyebrow">Impressionen</p>
+            <h2 data-i18n="gallery_title">Atmosphäre</h2>
+          </div>
+          <div class="gallery-stage" id="gallery-stage">
+            <div class="gallery-item"><img src="images/photo-bar-neon.jpg" alt="Bar bei Queen's"></div>
+            <div class="gallery-item"><img src="images/photo-kindl-beers.jpg" alt="Bier bei Queen's"></div>
+            <div class="gallery-item"><img src="images/photo-billiard-room.jpg" alt="Billiardraum bei Queen's"></div>
+            <div class="gallery-item"><img src="images/photo-storefront.jpg" alt="Fassade von Queen's"></div>
+            <div class="gallery-item"><img src="images/photo-dartboard-band.jpg" alt="Live-Musik bei Queen's"></div>
+            <div class="gallery-item"><img src="images/photo-jackdaniels.jpg" alt="Spirituosen-Deko bei Queen's"></div>
+            <div class="gallery-item"><img src="images/photo-billiard-shot.jpg" alt="Billiard-Abend bei Queen's"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Öffnungszeiten & Standort -->
+    <section id="oeffnungszeiten" class="section section--info">
+      <div class="container narrow reveal">
+        <p class="eyebrow" data-i18n="hours_eyebrow">Wann & Wo</p>
+        <h2 data-i18n="hours_title">Öffnungszeiten</h2>
+        <table class="hours-table">
+          <tbody>
+            <tr><td data-i18n="day_mon_thu">Mo – Do</td><td>18:00 – 01:00</td></tr>
+            <tr><td data-i18n="day_fri_sat">Fr – Sa</td><td>18:00 – 03:00</td></tr>
+            <tr><td data-i18n="day_sun">So</td><td>18:00 – 00:00</td></tr>
+          </tbody>
+        </table>
+        <p class="hours-note" data-i18n="hours_note">Platzhalter — bitte tatsächliche Öffnungszeiten eintragen.</p>
+
+        <p class="address">
+          <a href="mailto:info@queensberlin.de">info@queensberlin.de</a>
+        </p>
+
+        <a href="https://www.tripadvisor.com/Restaurant_Review-g187323-d27837867-Reviews-Queens_Schoneberg-Berlin.html" target="_blank" rel="noopener" class="tripadvisor-badge">
+          <span data-i18n="tripadvisor_cta">Bewertungen auf TripAdvisor</span> →
+        </a>
+      </div>
+    </section>
+
+    <!-- Anfahrt: eigene, sehr sichtbare Sektion -->
+    <section id="anfahrt" class="section section--anfahrt">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow" data-i18n="anfahrt_eyebrow">So findest du uns</p>
+          <h2 data-i18n="anfahrt_title">Anfahrt</h2>
+        </div>
+
+        <div class="anfahrt-grid">
+          <div class="anfahrt-map reveal">
+            <iframe
+              title="Standort Karte"
+              src="https://www.google.com/maps?q=Berlin&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+
+          <div class="anfahrt-copy reveal">
+            <p class="anfahrt-address">
+              Musterstraße 1<br>12047 Berlin
+            </p>
+            <p class="anfahrt-note" data-i18n="anfahrt_note">
+              Platzhalter — bitte echte Adresse und ggf. Haltestellen-Hinweise (U-/S-Bahn, Bus) eintragen.
+            </p>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Musterstra%C3%9Fe+1+12047+Berlin"
+               target="_blank" rel="noopener" class="btn btn--primary anfahrt-cta">
+              <span data-i18n="anfahrt_cta">Route planen</span> <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kiez-Blog -->
+    <section id="kiez-blog" class="section section--blog">
+      <div class="container narrow">
+        <div class="section-head reveal">
+          <p class="eyebrow" data-i18n="blog_eyebrow">Kiez-Blog</p>
+          <h2 data-i18n="blog_title">Was geht im Kiez</h2>
+        </div>
+
+        <article class="blog-post reveal">
+          <p class="blog-date">15. September 2026</p>
+          <h3 data-i18n="blog_post_title">Herbst im Kiez: Flohmarkt, Livemusik & mehr</h3>
+          <p data-i18n="blog_post_text">
+            Der Herbst bringt wieder einiges in unsere Nachbarschaft: Am Wochenende
+            öffnet der Flohmarkt um die Ecke, freitags spielt eine lokale Band im
+            Hinterhof, und auch bei uns wird bei kühleren Temperaturen wieder mehr
+            drinnen gefeiert. Schau vorbei — die erste Runde Dartscheibe geht aufs Haus.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Kontakt / Reservierung -->
+    <section id="kontakt" class="section section--contact">
+      <div class="container narrow">
+        <div class="section-head reveal">
+          <p class="eyebrow" data-i18n="contact_eyebrow">Reservierung</p>
+          <h2 data-i18n="contact_title">Tisch reservieren</h2>
+          <p data-i18n="contact_text">Kurz Bescheid geben, wir melden uns per E-Mail zurück.</p>
+        </div>
+
+        <!--
+          FORMULAR-VERSAND: Dieses Formular nutzt Formspree (kostenloser
+          Formular-Service für statische Websites, sendet direkt an
+          info@queensberlin.de). Die Aktion-URL unten (form-id) muss noch
+          durch eure echte Formspree-Endpunkt-ID ersetzt werden.
+          Siehe README.md für die Einrichtung (5 Minuten, kostenlos).
+        -->
+        <form action="https://formspree.io/f/REPLACE_WITH_FORMSPREE_ID" method="POST" class="booking-form reveal">
+          <input type="hidden" name="_subject" value="Neue Anfrage — Queen's">
+
+          <div class="form-row">
+            <label>
+              <span data-i18n="form_name">Name</span>
+              <input type="text" name="name" required>
+            </label>
+            <label>
+              <span data-i18n="form_email">Deine E-Mail</span>
+              <input type="email" name="_replyto" required>
+            </label>
+          </div>
+
+          <label>
+            <span data-i18n="form_subject">Anliegen</span>
+            <select name="anliegen" required>
+              <option value="Tischreservierung" data-i18n="form_subject_reservation">Tischreservierung</option>
+              <option value="Allgemeine Anfrage" data-i18n="form_subject_general">Allgemeine Anfrage</option>
+              <option value="Sonstiges" data-i18n="form_subject_other">Sonstiges</option>
+            </select>
+          </label>
+
+          <div class="form-row">
+            <label>
+              <span data-i18n="form_date">Datum (optional)</span>
+              <input type="date" name="date">
+            </label>
+            <label>
+              <span data-i18n="form_people">Personen (optional)</span>
+              <input type="number" name="people" min="1" max="30">
+            </label>
+          </div>
+
+          <label>
+            <span data-i18n="form_message">Notiz</span>
+            <textarea name="message" rows="4" required></textarea>
+          </label>
+
+          <button type="submit" class="btn btn--primary" data-i18n="form_submit">Anfrage senden</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <img src="images/queens-logo.png" alt="Queen's" class="logo-img logo-img--footer">
+        <p class="footer-badges">
+          <span data-i18n="badge_18">Ab 18</span> · <span data-i18n="badge_smoking">Raucherlokal</span>
+        </p>
+      </div>
+
+      <div class="social-links social-links--footer">
+        <a href="#" target="_blank" rel="noopener" aria-label="Instagram" data-i18n="footer_instagram">Instagram</a>
+        <a href="#" target="_blank" rel="noopener" aria-label="Facebook" data-i18n="footer_facebook">Facebook</a>
+        <a href="https://www.tripadvisor.com/Restaurant_Review-g187323-d27837867-Reviews-Queens_Schoneberg-Berlin.html" target="_blank" rel="noopener" data-i18n="tripadvisor_cta">TripAdvisor</a>
+      </div>
+
+      <div class="footer-legal">
+        <a href="#" data-i18n="footer_imprint">Impressum</a>
+        <a href="#" data-i18n="footer_privacy">Datenschutz</a>
+        <p>&copy; 2026 Queen's</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,692 @@
+[
+  {
+    "category": "Bier vom Fass",
+    "name": "Guinness",
+    "size": "0.3 l / 0.5 l",
+    "price": "4,50 / 5,40"
+  },
+  {
+    "category": "Bier vom Fass",
+    "name": "Kindl",
+    "size": "0.3 l / 0.5 l",
+    "price": "3,10 / 3,90"
+  },
+  {
+    "category": "Bier vom Fass",
+    "name": "Oberdorfer",
+    "size": "0.3 l / 0.5 l",
+    "price": "3,40 / 4,10"
+  },
+  {
+    "category": "Bier vom Fass",
+    "name": "Budweiser",
+    "size": "0.3 l / 0.5 l",
+    "price": "3,40 / 4,10"
+  },
+  {
+    "category": "Flaschenbiere",
+    "name": "Augustiner",
+    "size": "0.5 ml",
+    "price": "4,20"
+  },
+  {
+    "category": "Flaschenbiere",
+    "name": "Beck's",
+    "size": "0.33 ml",
+    "price": "3,10"
+  },
+  {
+    "category": "Flaschenbiere",
+    "name": "Beck's Alk.-Frei",
+    "size": "0.33 ml",
+    "price": "3,10"
+  },
+  {
+    "category": "Flaschenbiere",
+    "name": "Desperados",
+    "size": "0.33 ml",
+    "price": "4,80"
+  },
+  {
+    "category": "Flaschenbiere",
+    "name": "Erdinger Alk.-Frei",
+    "size": "0.5 ml",
+    "price": "4,10"
+  },
+  {
+    "category": "Flaschenbiere",
+    "name": "Erdinger Dunkel",
+    "size": "0.5 ml",
+    "price": "4,10"
+  },
+  {
+    "category": "Flaschenbiere",
+    "name": "Erdinger Hefeweizen",
+    "size": "0.5 ml",
+    "price": "4,10"
+  },
+  {
+    "category": "Flaschenbiere",
+    "name": "Erdinger Kristall",
+    "size": "0.5 ml",
+    "price": "4,10"
+  },
+  {
+    "category": "Flaschenbiere",
+    "name": "Flensburger",
+    "size": "0.33 ml",
+    "price": "3,10"
+  },
+  {
+    "category": "Flaschenbiere",
+    "name": "Heineken",
+    "size": "0.33 ml",
+    "price": "3,50"
+  },
+  {
+    "category": "Flaschenbiere",
+    "name": "Jever Alk.-Frei 0,00%",
+    "size": "0.33 ml",
+    "price": "3,10"
+  },
+  {
+    "category": "Flaschenbiere",
+    "name": "Schulthess",
+    "size": "0.33 ml",
+    "price": "2,60"
+  },
+  {
+    "category": "Klare Schnäpse",
+    "name": "Absolut Vodka",
+    "size": "2 cl",
+    "price": "2,90"
+  },
+  {
+    "category": "Klare Schnäpse",
+    "name": "Berentzen Korn",
+    "size": "2 cl",
+    "price": "2,10"
+  },
+  {
+    "category": "Klare Schnäpse",
+    "name": "Bombay Sapphire Gin",
+    "size": "2 cl",
+    "price": "4,10"
+  },
+  {
+    "category": "Klare Schnäpse",
+    "name": "Gorbatschow Vodka",
+    "size": "2 cl",
+    "price": "2,70"
+  },
+  {
+    "category": "Klare Schnäpse",
+    "name": "Gordon Gin",
+    "size": "2 cl",
+    "price": "3,30"
+  },
+  {
+    "category": "Klare Schnäpse",
+    "name": "Tequila Silver, Gold",
+    "size": "2 cl",
+    "price": "2,80"
+  },
+  {
+    "category": "Weinbrand",
+    "name": "Chantré",
+    "size": "2 cl",
+    "price": "2,60"
+  },
+  {
+    "category": "Weinbrand",
+    "name": "Osborn 103",
+    "size": "2 cl",
+    "price": "3,10"
+  },
+  {
+    "category": "Weinbrand",
+    "name": "Osborn Veterano Brandy",
+    "size": "2 cl",
+    "price": "2,90"
+  },
+  {
+    "category": "Weinbrand",
+    "name": "Wilthener Goldkrone",
+    "size": "2 cl",
+    "price": "2,20"
+  },
+  {
+    "category": "Rum",
+    "name": "Bacardi",
+    "size": "2 cl",
+    "price": "2,90"
+  },
+  {
+    "category": "Rum",
+    "name": "Captain Morgan",
+    "size": "2 cl",
+    "price": "2,90"
+  },
+  {
+    "category": "Rum",
+    "name": "Havanna Club 3 Jahre",
+    "size": "2 cl",
+    "price": "3,20"
+  },
+  {
+    "category": "Rum",
+    "name": "Havanna Club 7 Jahre",
+    "size": "2 cl",
+    "price": "4,60"
+  },
+  {
+    "category": "Rum",
+    "name": "Pott 40%",
+    "size": "2 cl",
+    "price": "2,50"
+  },
+  {
+    "category": "Whisky",
+    "name": "Ballentines Finest Scotch",
+    "size": "2 cl",
+    "price": "3,10"
+  },
+  {
+    "category": "Whisky",
+    "name": "Chivas Regal Scotch",
+    "size": "2 cl",
+    "price": "4,20"
+  },
+  {
+    "category": "Whisky",
+    "name": "Jack Daniels Tennessee",
+    "size": "2 cl",
+    "price": "3,50"
+  },
+  {
+    "category": "Whisky",
+    "name": "Jack Daniels Apple",
+    "size": "2 cl",
+    "price": "3,50"
+  },
+  {
+    "category": "Whisky",
+    "name": "Jack Daniels Honey",
+    "size": "2 cl",
+    "price": "3,50"
+  },
+  {
+    "category": "Whisky",
+    "name": "Jack Daniels Fire",
+    "size": "2 cl",
+    "price": "3,50"
+  },
+  {
+    "category": "Whisky",
+    "name": "Jack Daniels Black Berry",
+    "size": "2 cl",
+    "price": "3,50"
+  },
+  {
+    "category": "Whisky",
+    "name": "Jamson Irish",
+    "size": "2 cl",
+    "price": "3,50"
+  },
+  {
+    "category": "Whisky",
+    "name": "Jim Beam Bourbon",
+    "size": "2 cl",
+    "price": "2,90"
+  },
+  {
+    "category": "Whisky",
+    "name": "Johnny Walker Red",
+    "size": "2 cl",
+    "price": "3,40"
+  },
+  {
+    "category": "Whisky",
+    "name": "Johnny Walker Black",
+    "size": "2 cl",
+    "price": "4,60"
+  },
+  {
+    "category": "Whisky",
+    "name": "Tullamore Dew Irish",
+    "size": "2 cl",
+    "price": "3,50"
+  },
+  {
+    "category": "Kleine Liköre",
+    "name": "Feigling",
+    "size": "2 cl",
+    "price": "2,20"
+  },
+  {
+    "category": "Kleine Liköre",
+    "name": "Feigling Coco's",
+    "size": "2 cl",
+    "price": "2,20"
+  },
+  {
+    "category": "Kleine Liköre",
+    "name": "Ficken",
+    "size": "2 cl",
+    "price": "2,20"
+  },
+  {
+    "category": "Kleine Liköre",
+    "name": "Kümmerling",
+    "size": "2 cl",
+    "price": "2,00"
+  },
+  {
+    "category": "Kleine Liköre",
+    "name": "Pfläumle",
+    "size": "2 cl",
+    "price": "2,00"
+  },
+  {
+    "category": "Liköre",
+    "name": "43 Cuarenta Y Tres",
+    "size": "2 cl",
+    "price": "3,20"
+  },
+  {
+    "category": "Liköre",
+    "name": "Amaretto",
+    "size": "2 cl",
+    "price": "2,90"
+  },
+  {
+    "category": "Liköre",
+    "name": "Aperol",
+    "size": "2 cl",
+    "price": "3,10"
+  },
+  {
+    "category": "Liköre",
+    "name": "Bailey's Irish Cream",
+    "size": "2 cl",
+    "price": "3,10"
+  },
+  {
+    "category": "Liköre",
+    "name": "Batida De Coco",
+    "size": "2 cl",
+    "price": "2,90"
+  },
+  {
+    "category": "Liköre",
+    "name": "Bärenjäger",
+    "size": "2 cl",
+    "price": "3,10"
+  },
+  {
+    "category": "Liköre",
+    "name": "Berliner Luft",
+    "size": "2 cl",
+    "price": "2,60"
+  },
+  {
+    "category": "Liköre",
+    "name": "Campari",
+    "size": "2 cl",
+    "price": "2,90"
+  },
+  {
+    "category": "Liköre",
+    "name": "Jägermeister",
+    "size": "2 cl",
+    "price": "2,90"
+  },
+  {
+    "category": "Liköre",
+    "name": "Kruskovac",
+    "size": "2 cl",
+    "price": "2,90"
+  },
+  {
+    "category": "Liköre",
+    "name": "Pfeffi",
+    "size": "2 cl",
+    "price": "2,30"
+  },
+  {
+    "category": "Liköre",
+    "name": "Ramazzotti",
+    "size": "2 cl",
+    "price": "3,10"
+  },
+  {
+    "category": "Liköre",
+    "name": "Sambuca Molinari",
+    "size": "2 cl",
+    "price": "3,10"
+  },
+  {
+    "category": "Liköre",
+    "name": "Southern Comfort",
+    "size": "2 cl",
+    "price": "3,60"
+  },
+  {
+    "category": "Wein & Sekt",
+    "name": "Prosecco",
+    "size": "100 ml",
+    "price": "3,20"
+  },
+  {
+    "category": "Wein & Sekt",
+    "name": "Rose Wein",
+    "size": "200 ml",
+    "price": "3,40"
+  },
+  {
+    "category": "Wein & Sekt",
+    "name": "Rotwein (Trocken)",
+    "size": "200 ml",
+    "price": "3,40"
+  },
+  {
+    "category": "Wein & Sekt",
+    "name": "Weißwein (Trocken)",
+    "size": "200 ml",
+    "price": "3,40"
+  },
+  {
+    "category": "Piccolo",
+    "name": "Rotkäppchen",
+    "size": "200 ml",
+    "price": "5,90"
+  },
+  {
+    "category": "Longdrinks",
+    "name": "Batida - Kirsch",
+    "size": "4 cl",
+    "price": "5,90"
+  },
+  {
+    "category": "Longdrinks",
+    "name": "Captain Morgan - Cola",
+    "size": "2 cl / 4 cl",
+    "price": "4,10 / 6,30"
+  },
+  {
+    "category": "Longdrinks",
+    "name": "Cuba Libre",
+    "size": "4 cl",
+    "price": "6,50"
+  },
+  {
+    "category": "Longdrinks",
+    "name": "Futschi Chantre - Cola",
+    "size": "2 cl / 4 cl",
+    "price": "2,80 / 4,20"
+  },
+  {
+    "category": "Longdrinks",
+    "name": "Futschi Goldkrone - Cola",
+    "size": "2 cl / 4 cl",
+    "price": "2,60 / 4,10"
+  },
+  {
+    "category": "Longdrinks",
+    "name": "Gin - Tonic O Saft",
+    "size": "4 cl",
+    "price": "6,50"
+  },
+  {
+    "category": "Longdrinks",
+    "name": "Havanna - Cola",
+    "size": "2 cl / 4 cl",
+    "price": "3,90 / 6,50"
+  },
+  {
+    "category": "Longdrinks",
+    "name": "Jack Daniels - Cola",
+    "size": "2 cl / 4 cl",
+    "price": "4,20 / 6,90"
+  },
+  {
+    "category": "Longdrinks",
+    "name": "Jägermeister - Redbull",
+    "size": "4 cl",
+    "price": "7,50"
+  },
+  {
+    "category": "Longdrinks",
+    "name": "Jim Beam - Cola",
+    "size": "2 cl / 4 cl",
+    "price": "3,90 / 6,40"
+  },
+  {
+    "category": "Longdrinks",
+    "name": "Johnny Walker Red - Cola",
+    "size": "2 cl / 4 cl",
+    "price": "4,20 / 6,40"
+  },
+  {
+    "category": "Longdrinks",
+    "name": "Malibu - Kirsch",
+    "size": "2 cl / 4 cl",
+    "price": "4,20 / 6,40"
+  },
+  {
+    "category": "Longdrinks",
+    "name": "Southern Comfort - O-Saft",
+    "size": "2 cl / 4 cl",
+    "price": "4,20 / 6,40"
+  },
+  {
+    "category": "Longdrinks",
+    "name": "Voudini Vodka Lemon",
+    "size": "4 cl",
+    "price": "5,90"
+  },
+  {
+    "category": "Absolut",
+    "name": "Absolut - Cola",
+    "size": "4 cl",
+    "price": "6,50"
+  },
+  {
+    "category": "Absolut",
+    "name": "Absolut - Redbull",
+    "size": "4 cl",
+    "price": "8,10"
+  },
+  {
+    "category": "Absolut",
+    "name": "Absolut - Lemon",
+    "size": "4 cl",
+    "price": "6,50"
+  },
+  {
+    "category": "Gorbatschow",
+    "name": "Vodka - Redbull",
+    "size": "4 cl",
+    "price": "7,50"
+  },
+  {
+    "category": "Gorbatschow",
+    "name": "Vodka - Cola",
+    "size": "4 cl",
+    "price": "6,30"
+  },
+  {
+    "category": "Gorbatschow",
+    "name": "Vodka - Lemon",
+    "size": "4 cl",
+    "price": "5,90"
+  },
+  {
+    "category": "Gorbatschow",
+    "name": "Vodka - O-Saft",
+    "size": "4 cl",
+    "price": "5,90"
+  },
+  {
+    "category": "Alkoholfreie Getränke",
+    "name": "Apfelschorle",
+    "size": "0.2 l / 0.4 l",
+    "price": "1,80 / 3,20"
+  },
+  {
+    "category": "Alkoholfreie Getränke",
+    "name": "Bitter Lemon",
+    "size": "0.2 l / 0.4 l",
+    "price": "2,00 / 3,50"
+  },
+  {
+    "category": "Alkoholfreie Getränke",
+    "name": "Coca-Cola",
+    "size": "0.2 l / 0.4 l",
+    "price": "1,80 / 3,20"
+  },
+  {
+    "category": "Alkoholfreie Getränke",
+    "name": "Coca-Cola Zero",
+    "size": "0.2 l / 0.4 l",
+    "price": "1,80 / 3,20"
+  },
+  {
+    "category": "Alkoholfreie Getränke",
+    "name": "Fanta",
+    "size": "0.2 l / 0.4 l",
+    "price": "1,80 / 3,20"
+  },
+  {
+    "category": "Alkoholfreie Getränke",
+    "name": "Fassbrause",
+    "size": "0.2 l / 0.4 l",
+    "price": "2,00 / 3,50"
+  },
+  {
+    "category": "Alkoholfreie Getränke",
+    "name": "Gingen Ale",
+    "size": "0.2 l / 0.4 l",
+    "price": "2,00 / 3,50"
+  },
+  {
+    "category": "Alkoholfreie Getränke",
+    "name": "Mineralwasser",
+    "size": "0.2 l / 0.4 l",
+    "price": "1,80 / 3,20"
+  },
+  {
+    "category": "Alkoholfreie Getränke",
+    "name": "Redbull",
+    "size": "250 ml",
+    "price": "3,80"
+  },
+  {
+    "category": "Alkoholfreie Getränke",
+    "name": "Sprite",
+    "size": "0.2 l / 0.4 l",
+    "price": "1,80 / 3,20"
+  },
+  {
+    "category": "Alkoholfreie Getränke",
+    "name": "Stilles Wasser",
+    "size": "500 ml",
+    "price": "2,20"
+  },
+  {
+    "category": "Alkoholfreie Getränke",
+    "name": "Tonic Water",
+    "size": "0.2 l / 0.4 l",
+    "price": "2,00 / 3,20"
+  },
+  {
+    "category": "Heisse Getränke",
+    "name": "Espresso",
+    "size": "",
+    "price": "2,00"
+  },
+  {
+    "category": "Heisse Getränke",
+    "name": "Glas Latte Macchiatto",
+    "size": "",
+    "price": "3,80"
+  },
+  {
+    "category": "Heisse Getränke",
+    "name": "Glühwein",
+    "size": "",
+    "price": "2,90"
+  },
+  {
+    "category": "Heisse Getränke",
+    "name": "Grog 40% Rum",
+    "size": "",
+    "price": "3,40"
+  },
+  {
+    "category": "Heisse Getränke",
+    "name": "Pott Milchkaffee",
+    "size": "",
+    "price": "3,40"
+  },
+  {
+    "category": "Heisse Getränke",
+    "name": "Tasse Cappuccino",
+    "size": "",
+    "price": "2,90"
+  },
+  {
+    "category": "Heisse Getränke",
+    "name": "Tasse Heisse Schokolade",
+    "size": "",
+    "price": "3,20"
+  },
+  {
+    "category": "Heisse Getränke",
+    "name": "Tasse Kaffee",
+    "size": "",
+    "price": "2,50"
+  },
+  {
+    "category": "Heisse Getränke",
+    "name": "Tasse Kaffee mit Baileys",
+    "size": "",
+    "price": "4,50"
+  },
+  {
+    "category": "Heisse Getränke",
+    "name": "Tasse Tee",
+    "size": "",
+    "price": "1,80"
+  },
+  {
+    "category": "Säfte",
+    "name": "Apfelsaft",
+    "size": "0.2 l / 0.4 l",
+    "price": "1,90 / 3,50"
+  },
+  {
+    "category": "Säfte",
+    "name": "Bananennektar",
+    "size": "0.2 l / 0.4 l",
+    "price": "1,90 / 3,50"
+  },
+  {
+    "category": "Säfte",
+    "name": "Kirschnektar",
+    "size": "0.2 l / 0.4 l",
+    "price": "1,90 / 3,50"
+  },
+  {
+    "category": "Säfte",
+    "name": "Kiba",
+    "size": "0.2 l / 0.4 l",
+    "price": "1,90 / 3,50"
+  },
+  {
+    "category": "Säfte",
+    "name": "Orangensaft",
+    "size": "0.2 l / 0.4 l",
+    "price": "1,90 / 3,50"
+  }
+]

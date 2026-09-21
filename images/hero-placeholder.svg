@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <rect width="1600" height="900" fill="#1F3D2B"/>
+  <rect x="0" y="0" width="1600" height="900" fill="url(#grain)" opacity="0.06"/>
+  <defs>
+    <pattern id="grain" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="4" fill="#000"/>
+      <rect width="2" height="2" fill="#fff"/>
+    </pattern>
+  </defs>
+  <text x="800" y="430" font-family="Georgia, serif" font-size="46" fill="#F6F2EA" text-anchor="middle">PLATZHALTER — HERO</text>
+  <text x="800" y="490" font-family="Arial, sans-serif" font-size="26" fill="#B8894B" text-anchor="middle">wird später durch Video ersetzt (siehe README)</text>
+</svg>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Queen's — Getränkekarte</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+  <!--
+    DIESE SEITE IST BEWUSST NICHT VERLINKT (kein Nav-Eintrag auf der
+    Hauptseite) und trägt "noindex" — sie soll nur über den QR-Code am
+    Tisch erreichbar sein. Siehe README.md für Details.
+  -->
+  <header class="mhead">
+    <a class="mhead__brand" href="../index.html#top" aria-label="Zur Queen's-Webseite">
+      <img class="mhead__logo" src="../images/queens-logo.png" alt="Queen's">
+    </a>
+    <div class="mhead__title">
+      <p class="eyebrow">Queen's</p>
+      <h1>Getränkekarte</h1>
+    </div>
+  </header>
+
+  <div class="mtools">
+    <label class="msearch">
+      <span aria-hidden="true">⌕</span>
+      <input id="search" type="search" placeholder="Wonach suchst du? z.B. Gin Tonic …" aria-label="Getränk suchen" autocomplete="off">
+    </label>
+  </div>
+
+  <main class="mmain">
+    <p id="loading" class="mloading">Karte wird geladen …</p>
+    <div id="menu-list" hidden></div>
+    <p id="empty" class="mempty" hidden>Keine Getränke gefunden.</p>
+    <p class="mnote">Alle Preise in Euro</p>
+  </main>
+
+  <!--
+    Fixierte Bottom-Bar (Daumenzone) statt Kategorien im Content, die beim
+    Scrollen verschwinden — bleibt immer erreichbar und zeigt per
+    Scroll-Spy (menu.js) an, in welcher Kategorie man gerade ist.
+  -->
+  <nav id="groups" class="group-tiles" aria-label="Kategorien" hidden></nav>
+
+  <script src="menu.js"></script>
+</body>
+</html>
