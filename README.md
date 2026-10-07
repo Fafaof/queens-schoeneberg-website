@@ -1,134 +1,88 @@
-# Queens Berlin — Website
+# Queen's Schöneberg — Website
 
-Statische Website (HTML/CSS/JS, kein Build-Schritt nötig). Einfach
-`index.html` im Browser öffnen oder den ganzen Ordner auf einen
-beliebigen Webhoster (Netlify, GitHub Pages, eigenes Hosting) hochladen.
+Website mit eigenem kleinen Server (nur Node.js, keine weiteren Pakete, kein
+Build-Schritt). Der Wirt pflegt Getränkekarte und Kiez-Beiträge selbst im
+passwortgeschützten Verwaltungsbereich.
 
 ## Struktur
 
 ```
-index.html        Alle Inhalte/Sektionen
-css/style.css      Design (Farben, Typografie, Layout)
-js/main.js         Menü, Sprachumschalter DE/EN
-images/            Platzhalterbilder (SVG)
+index.html            Startseite
+kiez-blog.html        "Was geht im Kiez" (Beiträge kommen vom Server)
+menu/                 Getränkekarte (nur per QR-Code, nicht verlinkt)
+verwaltung/           Verwaltungsbereich für den Wirt (nicht verlinkt, Passwort)
+css/, js/, images/    Design, Skripte, Bilder
+server/server.js      Webserver + Schnittstelle (/api/...)
+server/data/          Inhalte als JSON + Passwort-Hash (nicht im Repository)
+uploads/              Vom Wirt hochgeladene Fotos (nicht im Repository)
+deploy/               Vorlagen für den VPS (systemd-Dienst, Caddy)
 ```
 
-## Vor dem Livegang: das Wichtigste
+## Lokal starten
 
-1. **Hero-Video einbauen**
-   In `index.html` im `<section class="hero">`-Block:
-   - Das `<img class="hero-media__img" ...>` entfernen
-   - Das auskommentierte `<video class="hero-media__video" ...>` aktivieren
-   - `images/hero-video.mp4` durch eure echte Videodatei ersetzen
-   - `poster="images/hero-placeholder.svg"` kann durch ein echtes Standbild
-     ersetzt werden (wird gezeigt, solange das Video lädt)
+```
+node server/set-password.js     # einmalig: Passwort für die Verwaltung setzen
+node server/server.js           # Seite läuft auf http://127.0.0.1:8000
+```
 
-2. **Fotos austauschen**
-   Alle `images/*-placeholder.svg` durch echte Fotos ersetzen (gleicher
-   Dateiname und Format ist nicht nötig — einfach den `src=` in
-   `index.html` anpassen, z.B. `images/billiard.jpg`).
+`index.html` direkt als Datei zu öffnen reicht nicht mehr: Beiträge,
+Verwaltung und Reservierungsformular brauchen den Server. (Die Getränkekarte
+fällt ohne Server auf `menu/menu-data.json` zurück.)
 
-3. **Formular aktivieren (Reservierung)**
-   Das Kontaktformular nutzt [Formspree](https://formspree.io) (kostenloser
-   Formular-Versand für statische Seiten, keine eigene Server-Programmierung
-   nötig):
-   - Kostenloses Konto auf formspree.io anlegen
-   - Neues Formular erstellen, Ziel-E-Mail: `info@queensberlin.de`
-   - Die dort angezeigte Formular-ID in `index.html` eintragen:
-     `action="https://formspree.io/f/REPLACE_WITH_FORMSPREE_ID"`
-   - Kostenlos bis 50 Anfragen/Monat — reicht für den Start locker
+## Verwaltungsbereich (für den Wirt)
 
-4. **TripAdvisor-Link**
-   Es gibt aktuell **kein kostenloses Live-Widget** von TripAdvisor mehr
-   ohne Business-Konto. Umgesetzt ist daher ein einfacher Link-Button
-   ("Bewertungen auf TripAdvisor"). In `index.html` (zwei Stellen:
-   Öffnungszeiten-Sektion + Footer) das `href="#"` durch euren echten
-   TripAdvisor-Profil-Link ersetzen.
+Adresse: `https://<domain>/verwaltung` — nirgends verlinkt, für Suchmaschinen
+gesperrt, Zugang nur mit Passwort (8 Fehlversuche in 15 Minuten, dann Sperre).
 
-5. **Adresse & Öffnungszeiten**
-   Aktuell Platzhalter ("Musterstraße 1, 12047 Berlin", Beispielzeiten) —
-   in `index.html` (Abschnitt "Öffnungszeiten") durch die echten Werte
-   ersetzen. Auch den Google-Maps-Embed-Link anpassen (aktuell zeigt er
-   nur allgemein auf "Berlin").
+- **Getränkekarte**: Kategorie aufklappen, Name/Größe/Preis ändern, Getränke
+  hinzufügen, löschen, mit ▲▼ umsortieren, dann **Speichern**. Die
+  Startwerte stammen aus `menu/menu-data.json`.
+- **Kiez-Beiträge**: Überschrift, Datum, Text und optional ein Foto;
+  „Veröffentlichen“ stellt den Beitrag sofort online. Fotos werden im Browser
+  auf max. 1600 px verkleinert.
+- **Anfragen**: Alles aus dem Formular „Tisch reservieren“. Es wird (noch)
+  **keine E-Mail** verschickt — der Wirt sieht die Anfragen hier und antwortet
+  per Tipp auf die E-Mail-Adresse.
 
-6. **Social-Links**
-   Alle `href="#"` bei Instagram/Facebook (Header + Footer) durch die
-   echten Profil-Links ersetzen.
+Neue Kategorien lassen sich in der Verwaltung nicht anlegen. Welche Kategorie
+zu welcher der sechs großen Kacheln gehört, steht in `menu/menu.js` im
+`GROUPS`-Array; dort auch die Banner-Bilder.
 
-7. **Blog-Beitrag**
-   Der Beitrag unter "Kiez-Blog" ist ein Beispieltext — Titel, Datum und
-   Text in `index.html` (Abschnitt `#kiez-blog`) durch echten Inhalt
-   ersetzen. Für weitere Beiträge einfach das `<article class="blog-post">`
-   duplizieren.
+Passwort ändern: auf dem Server `node server/set-password.js` (gilt sofort).
 
-8. **Impressum & Datenschutz**
-   Aktuell nur Platzhalter-Links im Footer — als Kneipenbetreiber seid ihr
-   gesetzlich zur Angabe eines Impressums verpflichtet. Am einfachsten:
-   zwei weitere Unterseiten (`impressum.html`, `datenschutz.html`) mit den
-   Pflichtangaben anlegen und im Footer verlinken.
+## Online stellen (VPS, z.B. Ubuntu 24.04)
 
-9. **Adresse für die Anfahrt & den "Route planen"-Button**
-   In `index.html` im Abschnitt `#anfahrt`: den Google-Maps-Embed-Link
-   und den `href` beim "Route planen"-Button (aktuell `Musterstraße 1
-   12047 Berlin`) durch die echte Adresse ersetzen.
+```
+sudo apt install nodejs caddy                 # Node.js ab Version 18
+sudo useradd --system --home /srv/queens queens
+sudo mkdir -p /srv/queens && sudo chown queens: /srv/queens
+# Projektordner nach /srv/queens kopieren (git clone oder rsync), dann:
+sudo -u queens node /srv/queens/server/set-password.js
+sudo cp /srv/queens/deploy/queens.service /etc/systemd/system/
+sudo systemctl enable --now queens
+sudo cp /srv/queens/deploy/Caddyfile /etc/caddy/Caddyfile   # Domain darin prüfen
+sudo systemctl reload caddy
+```
 
-## Getränkekarte (versteckte QR-Seite)
+Danach bei All-Inkl den **A-Eintrag** von `queensberlin.de` (und `www`) auf
+die IP des VPS umstellen. Die MX-Einträge **nicht** anfassen, sonst kommen
+keine E-Mails mehr an. Caddy holt das HTTPS-Zertifikat automatisch, sobald
+die Domain auf den VPS zeigt.
 
-Die Karte liegt unter `menu/index.html` — **absichtlich nicht** über die
-normale Navigation verlinkt und mit `<meta name="robots" content="noindex">`
-versehen, damit sie nur über den QR-Code am Tisch gefunden wird, nicht
-über Google oder die Website selbst. Sie funktioniert schon heute mit der
-echten, aus dem alten Projekt übernommenen Getränkeliste (`menu/menu-data.json`,
-115 Positionen).
+**Sicherung**: `server/data/` und `uploads/` enthalten alles, was der Wirt
+gepflegt hat — diese beiden Ordner regelmäßig sichern. Bei einem Update der
+Website dürfen sie nicht überschrieben werden.
 
-**Damit der Kunde die Karte selbst ändern kann, ohne Code anzufassen**
-(so wie er es sich gewünscht hat), auf ein Google Sheet umstellen:
-1. Neues Google Sheet anlegen mit den Spalten `Kategorie | Getränk | Größe | Preis`
-   (Größe darf leer bleiben, z.B. bei Espresso). Die 115 Zeilen aus
-   `menu/menu-data.json` können 1:1 als Startpunkt reinkopiert werden.
-2. In Google Sheets: **Datei → Freigeben → Im Web veröffentlichen → Format: CSV**
-3. Die dort angezeigte Link in `menu/menu.js` bei `SHEET_CSV_URL` eintragen
-4. Fertig — der Kunde bearbeitet ab dann nur noch ganz normal die Tabelle
-   (wie in Excel), die Website zieht sich bei jedem Aufruf automatisch den
-   aktuellen Stand. Ohne Internetverbindung zum Sheet fällt die Seite
-   automatisch auf `menu-data.json` zurück, geht also nie "kaputt".
+## Noch offen vor dem Livegang
 
-**Navigation bewusst reduziert und für Handys optimiert**: Statt einer
-Leiste mit allen 16 Einzelkategorien gibt es nur 6 große Kategorien
-(Bier, Wein & Sekt, Spirituosen, Longdrinks, Alkoholfrei, Warme Getränke),
-als **fixierte Bottom-Bar** in der Daumenzone — immer erreichbar, egal wie
-weit man runtergescrollt hat, mit Scroll-Spy (zeigt per Hervorhebung an,
-in welcher Kategorie man sich gerade befindet). Statt Emojis gibt es
-dezente Monogramm-Icons (Serif-Buchstabe im Goldring), passend zum
-Logo-Stil. Welche Tabellen-Kategorie zu welcher Kachel gehört, steht in
-`menu/menu.js` ganz oben im `GROUPS`-Array. Trägt der Kunde in der Tabelle
-eine komplett neue Kategorie ein, die dort nicht zugeordnet ist, landet
-sie automatisch unter "Weitere Getränke" — die Seite bricht also nie,
-auch ohne Code-Anpassung.
-
-**Ein Foto pro Kategorie, nicht pro Getränk**: Damit die Karte auf dem
-Handy appetitlich wirkt, ohne durch 115 Einzelbilder endlos lang zu
-werden, hat jede der 6 Kategorien genau ein Banner-Bild oben
-(`menu/images/banner-*.svg`, aktuell Platzhalter). Einfach durch ein
-appetitliches Foto ersetzen (z.B. ein Glas Bier für "Bier").
-
-**QR-Code zum Ausdrucken** (Tischaufsteller): Sobald die Seite online ist,
-z.B. mit [qr-code-generator.com](https://www.qr-code-generator.com) oder
-`qrencode` einen QR-Code auf die URL `https://eure-domain.de/menu/`
-erzeugen und ausdrucken. Bewusst **nicht** die lokale `file://`-Adresse
-verwenden — der QR-Code muss auf die live gehostete Seite zeigen.
-
-## Noch offen (nicht Teil des Codes)
-
-- **NFC-Chips**: Hardware separat bestellen (z.B. programmierbare NTAG215-
-  Chips), auf den Google-Maps-Bewertungslink des Kunden programmieren
-  (Google-Profil → "Rezension schreiben" → Link kopieren) und auf
-  Tischaufstellern anbringen.
-- **Fotos**: Falls keine eigenen Fotos vorliegen, Fotos aus dem
-  Google-Maps-Business-Profil des Kunden übernehmen (mit seiner
-  Zustimmung, da es sein eigenes Profil ist) und alle `images/*-placeholder.svg`
-  damit ersetzen.
-- **Instagram-Post-Design**: separate Aufgabe, nicht Teil dieser Website.
+- **Öffnungszeiten** in `index.html` sind Platzhalter; **Telefonnummer** fehlt.
+- **Instagram/Facebook**: `href="#"` in Header und Footer (beide HTML-Seiten).
+- **Impressum & Datenschutz**: Links im Footer führen noch ins Leere
+  (gesetzlich Pflicht).
+- **Hero-Video** hat nur 848 × 352 px — für ein scharfes Bild eine Datei in
+  mind. 1080p einsetzen (`images/queens-video.mp4`).
+- **QR-Code** für die Tische auf `https://<domain>/menu/` erzeugen.
+- **Google-Bewertungslink** im Footer einmal angemeldet testen.
 
 ## Atmosphäre-Galerie ("Riesenrad")
 

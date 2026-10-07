@@ -59,7 +59,6 @@ const translations = {
   badge_18: { de: 'Ab 18', en: '18+' },
   badge_smoking: { de: 'Raucherlokal', en: 'Smoking Allowed' },
 
-  hero_title: { de: 'Queen’s', en: 'Queen’s' },
   hero_subtitle: {
     de: 'Kaltes Bier, gute Musik, Billiard bis spät. Deine Kneipe im Kiez.',
     en: 'Cold beer, good music, pool until late. Your neighborhood bar.',
@@ -103,8 +102,8 @@ const translations = {
   anfahrt_eyebrow: { de: 'So findest du uns', en: 'How to Find Us' },
   anfahrt_title: { de: 'Anfahrt', en: 'Directions' },
   anfahrt_note: {
-    de: 'Platzhalter — bitte echte Adresse und ggf. Haltestellen-Hinweise (U-/S-Bahn, Bus) eintragen.',
-    en: 'Placeholder — please add the real address and transit stop details (subway, train, bus).',
+    de: 'U4 Rathaus Schöneberg · S Schöneberg — jeweils rund 5 Minuten zu Fuß.',
+    en: 'U4 Rathaus Schöneberg · S Schöneberg — each about a 5-minute walk.',
   },
   anfahrt_cta: { de: 'Route planen', en: 'Get Directions' },
 
@@ -121,14 +120,8 @@ const translations = {
 
   blog_eyebrow: { de: 'Kiez-Blog', en: 'Neighborhood Blog' },
   blog_title: { de: 'Was geht im Kiez', en: 'What’s Happening Here' },
-  blog_post_title: {
-    de: 'Herbst im Kiez: Flohmarkt, Livemusik & mehr',
-    en: 'Fall in the Neighborhood: Flea Market, Live Music & More',
-  },
-  blog_post_text: {
-    de: 'Der Herbst bringt wieder einiges in unsere Nachbarschaft: Am Wochenende öffnet der Flohmarkt um die Ecke, freitags spielt eine lokale Band im Hinterhof, und auch bei uns wird bei kühleren Temperaturen wieder mehr drinnen gefeiert. Schau vorbei — die erste Runde Dartscheibe geht aufs Haus.',
-    en: 'Fall is bringing plenty to our neighborhood: the flea market around the corner opens this weekend, a local band plays the backyard on Fridays, and as it gets colder we’re moving the party back inside. Stop by — the first round of darts is on the house.',
-  },
+  blog_loading: { de: 'Beiträge werden geladen …', en: 'Loading posts …' },
+  blog_empty: { de: 'Hier gibt es bald Neuigkeiten aus dem Queen’s.', en: 'News from Queen’s coming soon.' },
 
   contact_eyebrow: { de: 'Reservierung', en: 'Reservation' },
   contact_title: { de: 'Tisch reservieren', en: 'Reserve a Table' },
@@ -146,11 +139,17 @@ const translations = {
   form_people: { de: 'Personen (optional)', en: 'Guests (optional)' },
   form_message: { de: 'Notiz', en: 'Note' },
   form_submit: { de: 'Anfrage senden', en: 'Send Request' },
+  form_sending: { de: 'Wird gesendet …', en: 'Sending …' },
+  form_success: { de: 'Danke! Deine Anfrage ist angekommen, wir melden uns per E-Mail.', en: 'Thank you! We received your request and will reply by email.' },
+  form_invalid: { de: 'Bitte Name, E-Mail und Notiz ausfüllen.', en: 'Please fill in name, email and note.' },
+  form_error: { de: 'Das hat leider nicht geklappt. Bitte später noch einmal versuchen oder anrufen.', en: 'Sorry, that did not work. Please try again later or give us a call.' },
 
   footer_instagram: { de: 'Instagram', en: 'Instagram' },
   footer_facebook: { de: 'Facebook', en: 'Facebook' },
   footer_imprint: { de: 'Impressum', en: 'Imprint' },
   footer_privacy: { de: 'Datenschutz', en: 'Privacy' },
+  footer_review: { de: 'Bewerte uns auf Google', en: 'Review us on Google' },
+  blog_back: { de: '← Zurück zur Startseite', en: '← Back to the home page' },
 };
 
 const langToggle = document.getElementById('lang-toggle');
@@ -257,7 +256,8 @@ if (galleryPin && galleryStage && galleryItems.length && !prefersReducedMotion) 
     const scrollableDistance = galleryPin.offsetHeight - window.innerHeight;
     if (scrollableDistance <= 0) return;
     const progress = Math.min(1, Math.max(0, -rect.top / scrollableDistance));
-    const wheelAngle = progress * 360; // eine volle Umdrehung über die ganze Scroll-Distanz
+    // Bewusst keine volle Umdrehung: sonst steht am Ende wieder das erste Bild vorne.
+    const wheelAngle = progress * (360 - angleStep);
 
     galleryItems.forEach((item, i) => {
       const totalAngle = i * angleStep + wheelAngle;
@@ -288,4 +288,55 @@ if (galleryPin && galleryStage && galleryItems.length && !prefersReducedMotion) 
   });
 } else if (galleryPin) {
   galleryPin.classList.add('no-scrolljack');
+}
+
+// ---------- Hero (Desktop): Logo und Video reagieren leicht versetzt auf die Maus ----------
+const hero = document.querySelector('.hero');
+if (hero && !prefersReducedMotion && window.matchMedia('(min-width: 861px) and (pointer: fine)').matches) {
+  hero.addEventListener('pointermove', (event) => {
+    const rect = hero.getBoundingClientRect();
+    hero.style.setProperty('--px', (((event.clientX - rect.left) / rect.width) * 2 - 1).toFixed(3));
+    hero.style.setProperty('--py', (((event.clientY - rect.top) / rect.height) * 2 - 1).toFixed(3));
+  });
+  hero.addEventListener('pointerleave', () => {
+    hero.style.setProperty('--px', '0');
+    hero.style.setProperty('--py', '0');
+  });
+}
+
+// ---------- Reservierungsformular: Anfrage an den eigenen Server schicken ----------
+const bookingForm = document.getElementById('booking-form');
+if (bookingForm) {
+  const bookingStatus = document.getElementById('booking-status');
+  const bookingButton = bookingForm.querySelector('button[type="submit"]');
+  const showStatus = (key, isError) => {
+    bookingStatus.textContent = translations[key][currentLang];
+    bookingStatus.classList.toggle('is-error', isError);
+    bookingStatus.hidden = false;
+  };
+
+  bookingForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!bookingForm.checkValidity()) {
+      showStatus('form_invalid', true);
+      return;
+    }
+    const data = Object.fromEntries(new FormData(bookingForm).entries());
+    bookingButton.disabled = true;
+    showStatus('form_sending', false);
+    try {
+      const response = await fetch('/api/anfrage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) throw new Error(String(response.status));
+      bookingForm.reset();
+      showStatus('form_success', false);
+    } catch {
+      showStatus('form_error', true);
+    } finally {
+      bookingButton.disabled = false;
+    }
+  });
 }

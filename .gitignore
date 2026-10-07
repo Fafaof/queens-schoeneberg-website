@@ -1,0 +1,4 @@
+# Inhalte und Passwort-Hash liegen nur auf dem Server, nicht im Repository
+server/data/
+uploads/
+.DS_Store

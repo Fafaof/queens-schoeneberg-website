@@ -1,0 +1,7 @@
+# Caddy nimmt die Besucher entgegen, besorgt automatisch das
+# HTTPS-Zertifikat und reicht alles an den Queen's-Server weiter.
+# Installieren:  sudo cp deploy/Caddyfile /etc/caddy/Caddyfile && sudo systemctl reload caddy
+queensberlin.de, www.queensberlin.de {
+	encode gzip
+	reverse_proxy 127.0.0.1:8000
+}

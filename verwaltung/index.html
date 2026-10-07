@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Queen's — Verwaltung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="verwaltung.css">
+</head>
+<body>
+  <!--
+    VERWALTUNG: bewusst nirgends auf der Website verlinkt und für
+    Suchmaschinen gesperrt. Hier pflegt der Wirt Getränkekarte, Kiez-Beiträge
+    und sieht Reservierungsanfragen. Zugang nur mit Passwort
+    (setzen mit: node server/set-password.js).
+  -->
+
+  <!-- Anmeldung -->
+  <main id="login-view" class="login" hidden>
+    <img src="../images/queens-logo-dark.png" alt="Queen's" class="login__logo">
+    <h1>Verwaltung</h1>
+    <form id="login-form" class="card">
+      <label>
+        <span>Passwort</span>
+        <input type="password" id="login-password" autocomplete="current-password" required>
+      </label>
+      <p id="login-error" class="message message--error" hidden></p>
+      <button type="submit" class="btn btn--primary btn--wide">Anmelden</button>
+    </form>
+  </main>
+
+  <!-- Angemeldet -->
+  <div id="app-view" hidden>
+    <header class="topbar">
+      <img src="../images/queens-logo-dark.png" alt="Queen's" class="topbar__logo">
+      <span class="topbar__title">Verwaltung</span>
+      <button type="button" id="logout" class="btn btn--quiet">Abmelden</button>
+    </header>
+
+    <nav class="tabs" role="tablist">
+      <button type="button" class="tab is-active" data-tab="menu" role="tab">Getränkekarte</button>
+      <button type="button" class="tab" data-tab="posts" role="tab">Kiez-Beiträge</button>
+      <button type="button" class="tab" data-tab="requests" role="tab">Anfragen <span id="requests-count" class="count" hidden></span></button>
+    </nav>
+
+    <!-- Getränkekarte -->
+    <section id="tab-menu" class="panel">
+      <p class="hint">Kategorie antippen, um sie aufzuklappen. Ändern, dann unten auf <strong>Speichern</strong> tippen — erst dann sehen es die Gäste.</p>
+      <div id="menu-editor"></div>
+      <div class="savebar">
+        <span id="menu-status" class="savebar__status">Alles gespeichert</span>
+        <a href="../menu/" target="_blank" rel="noopener" class="btn btn--quiet">Karte ansehen</a>
+        <button type="button" id="menu-save" class="btn btn--primary" disabled>Speichern</button>
+      </div>
+    </section>
+
+    <!-- Kiez-Beiträge -->
+    <section id="tab-posts" class="panel" hidden>
+      <button type="button" id="post-new" class="btn btn--primary btn--wide">+ Neuer Beitrag</button>
+
+      <form id="post-form" class="card" hidden>
+        <h2 id="post-form-title">Neuer Beitrag</h2>
+        <label>
+          <span>Überschrift</span>
+          <input type="text" id="post-title" maxlength="160" required>
+        </label>
+        <label>
+          <span>Datum</span>
+          <input type="date" id="post-date" required>
+        </label>
+        <label>
+          <span>Text</span>
+          <textarea id="post-text" rows="8" maxlength="8000" required placeholder="Was gibt es Neues? Eine Leerzeile beginnt einen neuen Absatz."></textarea>
+        </label>
+        <div class="field">
+          <span>Foto (optional)</span>
+          <img id="post-image-preview" class="preview" alt="" hidden>
+          <div class="row-buttons">
+            <label class="btn btn--quiet filepick">
+              <input type="file" id="post-image" accept="image/*">
+              <span id="post-image-label">Foto auswählen</span>
+            </label>
+            <button type="button" id="post-image-remove" class="btn btn--quiet" hidden>Foto entfernen</button>
+          </div>
+        </div>
+        <p id="post-error" class="message message--error" hidden></p>
+        <div class="row-buttons">
+          <button type="submit" id="post-submit" class="btn btn--primary">Veröffentlichen</button>
+          <button type="button" id="post-cancel" class="btn btn--quiet">Abbrechen</button>
+        </div>
+      </form>
+
+      <div id="post-list"></div>
+      <p class="hint"><a href="../kiez-blog.html" target="_blank" rel="noopener">Seite „Was geht im Kiez“ ansehen</a></p>
+    </section>
+
+    <!-- Anfragen -->
+    <section id="tab-requests" class="panel" hidden>
+      <p class="hint">Hier landen die Anfragen aus dem Formular „Tisch reservieren“. Zum Antworten auf die E-Mail-Adresse tippen.</p>
+      <div id="request-list"></div>
+    </section>
+
+    <p id="toast" class="toast" hidden></p>
+  </div>
+
+  <script src="verwaltung.js"></script>
+</body>
+</html>

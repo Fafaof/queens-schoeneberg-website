@@ -1,0 +1,23 @@
+# systemd-Dienst: hält den Queen's-Server am Laufen und startet ihn nach
+# einem Neustart des VPS automatisch.
+# Installieren:  sudo cp deploy/queens.service /etc/systemd/system/
+#                sudo systemctl enable --now queens
+[Unit]
+Description=Queen's Website
+After=network.target
+
+[Service]
+User=queens
+WorkingDirectory=/srv/queens
+Environment=HOST=127.0.0.1
+Environment=PORT=8000
+ExecStart=/usr/bin/node server/server.js
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/srv/queens/server/data /srv/queens/uploads
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

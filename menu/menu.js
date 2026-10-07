@@ -1,18 +1,9 @@
 // ---------- Getränkekarte: Datenquelle ----------
-// Standard: eine veröffentlichte Google-Tabelle (CSV-Export) — der Kunde
-// pflegt seine Karte dort ganz normal wie in Excel, ohne Code anzufassen.
-// Solange keine Tabelle eingerichtet ist (SHEET_CSV_URL leer), wird
-// automatisch die lokale menu-data.json genutzt, damit die Seite auch
-// ohne Google-Sheet-Einrichtung sofort funktioniert.
-//
-// Einrichtung (siehe auch README.md):
-// 1. Google Sheet anlegen mit den Spalten: Kategorie | Getränk | Größe | Preis
-//    (Größe darf leer bleiben, z.B. bei Espresso)
-// 2. Datei → Freigeben → Im Web veröffentlichen → als CSV
-// 3. Die dort angezeigte URL unten bei SHEET_CSV_URL eintragen
-// 4. Fertig — der Kunde ändert ab jetzt nur noch die Tabelle, die Seite
-//    lädt bei jedem Aufruf den aktuellen Stand.
-const SHEET_CSV_URL = ""; // z.B. "https://docs.google.com/spreadsheets/d/e/.../pub?output=csv"
+// Die Karte kommt vom Server (/api/menu) — dort pflegt sie der Wirt im
+// Verwaltungsbereich (/verwaltung/). Ist der Server nicht erreichbar (z.B.
+// wenn die Seite nur als Dateien geöffnet wird), wird die mitgelieferte
+// menu-data.json genutzt, damit die Karte nie leer bleibt.
+const MENU_API_URL = "/api/menu";
 const FALLBACK_JSON_URL = "menu-data.json";
 
 // ---------- Wenige, große Oberkategorien statt 16 einzelner Chips ----------
@@ -20,15 +11,14 @@ const FALLBACK_JSON_URL = "menu-data.json";
 // großen Gruppen zugeordnet, damit Gäste mit 1 Klick zu dem kommen, was
 // sie wirklich suchen, statt eine lange Chip-Leiste durchsuchen zu
 // müssen. Neue Kategorie-Namen aus der Tabelle, die hier nicht auftauchen,
-// landen automatisch in "Weitere Getränke" — die Seite bricht also nie,
-// auch wenn der Kunde in der Tabelle etwas Neues einträgt.
+// landen automatisch in "Weitere Getränke" — die Seite bricht also nie.
 const GROUPS = [
   { id: "bier", letter: "B", banner: "../images/photo-guinness.jpg", name: "Bier", match: ["Bier vom Fass", "Flaschenbiere"] },
-  { id: "wein", letter: "W", banner: "images/banner-wein.svg", name: "Wein & Sekt", match: ["Wein & Sekt", "Piccolo"] },
+  { id: "wein", letter: "W", banner: "images/banner-wein.jpg", name: "Wein & Sekt", match: ["Wein & Sekt", "Piccolo"] },
   { id: "spirituosen", letter: "S", banner: "../images/photo-jackdaniels.jpg", name: "Spirituosen", match: ["Klare Schnäpse", "Weinbrand", "Rum", "Whisky", "Kleine Liköre", "Liköre"] },
-  { id: "longdrinks", letter: "L", banner: "images/banner-longdrinks.svg", name: "Longdrinks", match: ["Longdrinks", "Absolut", "Gorbatschow"] },
-  { id: "alkoholfrei", letter: "A", banner: "images/banner-alkoholfrei.svg", name: "Alkoholfrei", match: ["Alkoholfreie Getränke", "Säfte"] },
-  { id: "warm", letter: "H", banner: "images/banner-warm.svg", name: "Warme Getränke", match: ["Heisse Getränke"] },
+  { id: "longdrinks", letter: "L", banner: "images/banner-longdrinks.jpg", name: "Longdrinks", match: ["Longdrinks", "Absolut", "Gorbatschow"] },
+  { id: "alkoholfrei", letter: "A", banner: "images/banner-alkoholfrei.jpg", name: "Alkoholfrei", match: ["Alkoholfreie Getränke", "Säfte"] },
+  { id: "warm", letter: "H", banner: "images/banner-warm.jpg", name: "Warme Getränke", match: ["Heisse Getränke"] },
 ];
 const FALLBACK_GROUP = { id: "weitere", letter: "+", banner: "", name: "Weitere Getränke" };
 
@@ -44,56 +34,6 @@ const loading = document.querySelector("#loading");
 
 const escapeHtml = (value) =>
   String(value).replace(/[&<>"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[char]));
-
-// Sehr einfacher CSV-Parser: kommt mit Anführungszeichen und Kommas in
-// Feldern klar (Standard-Export von Google Sheets).
-function parseCsv(text) {
-  const rows = [];
-  let row = [];
-  let field = "";
-  let inQuotes = false;
-  for (let i = 0; i < text.length; i++) {
-    const char = text[i];
-    if (inQuotes) {
-      if (char === '"' && text[i + 1] === '"') { field += '"'; i++; }
-      else if (char === '"') { inQuotes = false; }
-      else { field += char; }
-    } else if (char === '"') {
-      inQuotes = true;
-    } else if (char === ",") {
-      row.push(field); field = "";
-    } else if (char === "\n" || char === "\r") {
-      if (char === "\r" && text[i + 1] === "\n") i++;
-      row.push(field); field = "";
-      if (row.some((cell) => cell.trim() !== "")) rows.push(row);
-      row = [];
-    } else {
-      field += char;
-    }
-  }
-  if (field !== "" || row.length) { row.push(field); rows.push(row); }
-  return rows;
-}
-
-function csvToItems(text) {
-  const rows = parseCsv(text);
-  if (!rows.length) return [];
-  const [header, ...body] = rows;
-  const idx = {
-    category: header.findIndex((h) => h.trim().toLowerCase().startsWith("kategorie")),
-    name: header.findIndex((h) => h.trim().toLowerCase().startsWith("getr")),
-    size: header.findIndex((h) => h.trim().toLowerCase().startsWith("gr")),
-    price: header.findIndex((h) => h.trim().toLowerCase().startsWith("preis")),
-  };
-  return body
-    .filter((cols) => cols[idx.name] && cols[idx.name].trim())
-    .map((cols) => ({
-      category: (cols[idx.category] || "Sonstiges").trim(),
-      name: cols[idx.name].trim(),
-      size: (idx.size >= 0 ? cols[idx.size] || "" : "").trim(),
-      price: (cols[idx.price] || "").trim(),
-    }));
-}
 
 // Baut die Struktur: Oberkategorie → Unterkategorie(n) → Getränke,
 // in der festen Reihenfolge von GROUPS (nicht in Tabellen-Reihenfolge),
@@ -169,6 +109,23 @@ function renderMenu(items) {
   // Kategorie man sich gerade befindet — der Nutzer muss nie raten, wo
   // er ist oder was als Nächstes kommt.
   const navTiles = Array.from(groupNav.querySelectorAll(".group-tile"));
+
+  // Sprung zur Kategorie selbst ausführen statt über den Anker-Link: das
+  // weiche Browser-Scrollen über mehrere tausend Pixel brach auf Handys ab
+  // und landete wieder oben. Direkt springen ist bei der langen Karte auch
+  // schneller. Die Suchleiste klebt oben, deshalb ihre Höhe abziehen.
+  const tools = document.querySelector(".mtools");
+  navTiles.forEach((tile) => {
+    tile.addEventListener("click", (event) => {
+      const section = document.getElementById(tile.dataset.target);
+      if (!section) return;
+      event.preventDefault();
+      const offset = (tools ? tools.offsetHeight : 0) + 12;
+      window.scrollTo(0, section.getBoundingClientRect().top + window.scrollY - offset);
+      navTiles.forEach((t) => t.classList.remove("is-active"));
+      tile.classList.add("is-active");
+    });
+  });
   if ("IntersectionObserver" in window && navTiles.length) {
     const spy = new IntersectionObserver(
       (entries) => {
@@ -208,24 +165,17 @@ function renderMenu(items) {
 }
 
 async function loadMenu() {
-  if (SHEET_CSV_URL) {
+  for (const url of [MENU_API_URL, FALLBACK_JSON_URL]) {
     try {
-      const response = await fetch(SHEET_CSV_URL, { cache: "no-store" });
-      if (!response.ok) throw new Error("Sheet nicht erreichbar");
-      const items = csvToItems(await response.text());
-      if (items.length) return renderMenu(items);
+      const response = await fetch(url, { cache: "no-store" });
+      if (!response.ok) throw new Error(`${url}: ${response.status}`);
+      const items = await response.json();
+      if (Array.isArray(items) && items.length) return renderMenu(items);
     } catch (error) {
-      console.warn("Konnte Google Sheet nicht laden, nutze lokale menu-data.json:", error);
+      console.warn("Karte konnte nicht geladen werden von", url, error);
     }
   }
-  try {
-    const response = await fetch(FALLBACK_JSON_URL, { cache: "no-store" });
-    const items = await response.json();
-    renderMenu(items);
-  } catch (error) {
-    loading.textContent = "Karte konnte nicht geladen werden.";
-    console.error(error);
-  }
+  loading.textContent = "Karte konnte nicht geladen werden.";
 }
 
 loadMenu();
