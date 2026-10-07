@@ -75,8 +75,7 @@ Website dürfen sie nicht überschrieben werden.
 
 ## Noch offen vor dem Livegang
 
-- **Öffnungszeiten** in `index.html` sind Platzhalter; **Telefonnummer** fehlt.
-- **Instagram/Facebook**: `href="#"` in Header und Footer (beide HTML-Seiten).
+- **Öffnungszeiten** in `index.html` sind Platzhalter.
 - **Impressum & Datenschutz**: Links im Footer führen noch ins Leere
   (gesetzlich Pflicht).
 - **Hero-Video** hat nur 848 × 352 px — für ein scharfes Bild eine Datei in
