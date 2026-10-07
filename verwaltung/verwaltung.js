@@ -48,6 +48,10 @@ function toast(message, isError = false) {
   toastTimer = setTimeout(() => { node.hidden = true; }, isError ? 6000 : 2500);
 }
 
+// Hochgeladene Fotos liegen im Ordner uploads/ eine Ebene höher; in der
+// GitHub-Pages-Vorschau (js/vorschau.js) sind es eingebettete data:-Adressen.
+const imageUrl = (image) => (image.startsWith('data:') ? image : `../${image}`);
+
 const formatDate = (iso) => {
   const [year, month, day] = String(iso).slice(0, 10).split('-');
   return day ? `${day}.${month}.${year}` : '';
@@ -241,7 +245,7 @@ function setPostImage(image) {
   postImage = image;
   const preview = $('#post-image-preview');
   preview.hidden = !image;
-  if (image) preview.src = `../${image}`;
+  if (image) preview.src = imageUrl(image);
   $('#post-image-remove').hidden = !image;
   $('#post-image-label').textContent = image ? 'Anderes Foto wählen' : 'Foto auswählen';
 }
@@ -333,7 +337,7 @@ async function loadPosts() {
       el('article', { class: 'card entry' }, [
         el('p', { class: 'entry__meta', text: formatDate(post.date) }),
         el('h3', { class: 'entry__title', text: post.title }),
-        ...(post.image ? [el('img', { class: 'entry__image', src: `../${post.image}`, alt: '' })] : []),
+        ...(post.image ? [el('img', { class: 'entry__image', src: imageUrl(post.image), alt: '' })] : []),
         el('p', { class: 'entry__text', text: post.text.length > 220 ? `${post.text.slice(0, 220)} …` : post.text }),
         el('div', { class: 'row-buttons' }, [
           el('button', { type: 'button', class: 'btn btn--quiet', text: 'Bearbeiten', onclick: () => openPostForm(post) }),
