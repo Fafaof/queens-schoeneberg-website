@@ -853,15 +853,21 @@ h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
   /* Handy-Hero: Video als Band oben in voller Breite und ganzem Bild statt
      stark hineingezoomt (die Datei hat nur 848 × 352 px) — so bleibt es
      scharf. Logo, Text und Buttons stehen darunter. */
+  /* Hinter Logo und Buttons liegt ein abgedunkeltes Tresen-Foto mit warmem
+     Bernstein-Schein — Kneipenlicht statt schwarzer Fläche. */
   .hero {
     display: block;
     min-height: 0;
-    background: linear-gradient(180deg, #16120d 0%, #1b241a 100%);
+    background:
+      radial-gradient(ellipse 90% 55% at 30% 62%, rgba(184, 110, 40, 0.34) 0%, transparent 70%),
+      linear-gradient(180deg, rgba(30, 14, 7, 0.8) 0%, rgba(28, 16, 9, 0.76) 50%, rgba(22, 40, 28, 0.95) 100%),
+      url("../images/queens-tresen-nah.jpg") center 35% / cover;
   }
+  .hero-media { border-bottom: 2px solid var(--color-gold); }
   /* exakt das Seitenverhältnis der Videodatei: nichts wird abgeschnitten */
   .hero-media { position: relative; inset: auto; aspect-ratio: 848 / 352; }
   .hero-overlay {
-    background: linear-gradient(180deg, rgba(70, 32, 10, 0.08) 0%, rgba(40, 20, 10, 0.1) 80%, #16120d 100%);
+    background: linear-gradient(180deg, rgba(70, 32, 10, 0.08) 0%, rgba(40, 20, 10, 0.14) 100%);
   }
   .hero-content { padding-top: 24px; padding-bottom: 40px; }
   /* "Ab 18 · Raucherlokal" steht schon als Plaketten über dem Logo */
