@@ -850,19 +850,20 @@ h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
   .gallery-pin { height: 280vh; }
   .gallery-item { width: min(78vw, 380px); }
 
-  /* Handy-Hero: Video als Band oben in fast voller Breite statt stark
-     hineingezoomt (die Datei hat nur 848 × 352 px) — so bleibt es scharf.
-     Logo, Text und Buttons stehen darunter und ragen leicht ins Video. */
+  /* Handy-Hero: Video als Band oben in voller Breite und ganzem Bild statt
+     stark hineingezoomt (die Datei hat nur 848 × 352 px) — so bleibt es
+     scharf. Logo, Text und Buttons stehen darunter. */
   .hero {
     display: block;
     min-height: 0;
     background: linear-gradient(180deg, #16120d 0%, #1b241a 100%);
   }
-  .hero-media { position: relative; inset: auto; aspect-ratio: 16 / 9; }
+  /* exakt das Seitenverhältnis der Videodatei: nichts wird abgeschnitten */
+  .hero-media { position: relative; inset: auto; aspect-ratio: 848 / 352; }
   .hero-overlay {
-    background: linear-gradient(180deg, rgba(70, 32, 10, 0.1) 0%, rgba(40, 20, 10, 0.18) 55%, #16120d 100%);
+    background: linear-gradient(180deg, rgba(70, 32, 10, 0.08) 0%, rgba(40, 20, 10, 0.1) 80%, #16120d 100%);
   }
-  .hero-content { margin-top: -56px; padding-bottom: 40px; }
+  .hero-content { padding-top: 24px; padding-bottom: 40px; }
   /* "Ab 18 · Raucherlokal" steht schon als Plaketten über dem Logo */
   .ticket-stub { display: none; }
 
