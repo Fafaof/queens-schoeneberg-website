@@ -28,7 +28,7 @@ const MENU_SEED = path.join(ROOT, 'menu', 'menu-data.json');
 
 // Nur diese Ordner/Dateitypen werden öffentlich ausgeliefert — server/,
 // deploy/, .git und alles andere bleibt von außen unerreichbar.
-const PUBLIC_DIRS = new Set(['css', 'js', 'images', 'menu', 'uploads', 'verwaltung']);
+const PUBLIC_DIRS = new Set(['css', 'js', 'fonts', 'images', 'menu', 'uploads', 'verwaltung']);
 const MIME = {
   '.html': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
@@ -47,6 +47,9 @@ const MIME = {
 const SESSION_HOURS = 12;
 const MAX_JSON_BYTES = 512 * 1024;
 const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
+// Reservierungsanfragen werden nach 6 Monaten automatisch gelöscht —
+// so steht es auch in der Datenschutzerklärung (datenschutz.html).
+const REQUEST_MAX_AGE_MS = 180 * 24 * 60 * 60 * 1000;
 const sessions = new Map(); // token -> Ablaufzeit (ms)
 const attempts = new Map(); // "bereich:ip" -> [Zeitstempel]
 
@@ -123,6 +126,12 @@ function tooMany(scope, ip, max, windowMs) {
 }
 
 const clean = (value, max) => String(value ?? '').replace(/\s+$/g, '').slice(0, max);
+
+async function readRequests() {
+  const all = await readJson(FILES.requests, []);
+  const cutoff = Date.now() - REQUEST_MAX_AGE_MS;
+  return all.filter((entry) => new Date(entry.received).getTime() >= cutoff);
+}
 
 // ---------- Anmeldung ----------
 function hashPassword(password, salt = crypto.randomBytes(16).toString('hex')) {
@@ -249,7 +258,7 @@ async function handleApi(req, res, url) {
     if (!entry.name || !entry.message || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(entry.email)) {
       return send(res, 400, { error: 'Bitte Name, E-Mail und Notiz ausfüllen.' });
     }
-    const all = await readJson(FILES.requests, []);
+    const all = await readRequests();
     all.unshift(entry);
     await writeJson(FILES.requests, all.slice(0, 500));
     return send(res, 200, { ok: true });
@@ -328,11 +337,11 @@ async function handleApi(req, res, url) {
   }
 
   if (route === 'GET /api/anfragen') {
-    return send(res, 200, await readJson(FILES.requests, []));
+    return send(res, 200, await readRequests());
   }
   const requestMatch = /^\/api\/anfragen\/([a-f0-9]{16})$/.exec(url.pathname);
   if (requestMatch && (req.method === 'PUT' || req.method === 'DELETE')) {
-    const all = await readJson(FILES.requests, []);
+    const all = await readRequests();
     const index = all.findIndex((entry) => entry.id === requestMatch[1]);
     if (index < 0) return send(res, 404, { error: 'Anfrage nicht gefunden.' });
     if (req.method === 'DELETE') all.splice(index, 1);

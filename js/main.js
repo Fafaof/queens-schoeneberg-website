@@ -139,6 +139,7 @@ const translations = {
   form_people: { de: 'Personen (optional)', en: 'Guests (optional)' },
   form_message: { de: 'Notiz', en: 'Note' },
   form_submit: { de: 'Anfrage senden', en: 'Send Request' },
+  form_privacy: { de: 'Deine Angaben nutzen wir nur, um deine Anfrage zu beantworten.', en: 'We only use your details to answer your request.' },
   form_sending: { de: 'Wird gesendet …', en: 'Sending …' },
   form_success: { de: 'Danke! Deine Anfrage ist angekommen, wir melden uns per E-Mail.', en: 'Thank you! We received your request and will reply by email.' },
   form_invalid: { de: 'Bitte Name, E-Mail und Notiz ausfüllen.', en: 'Please fill in name, email and note.' },

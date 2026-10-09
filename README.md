@@ -75,8 +75,12 @@ Website dürfen sie nicht überschrieben werden.
 
 ## Noch offen vor dem Livegang
 
-- **Impressum & Datenschutz**: Links im Footer führen noch ins Leere
-  (gesetzlich Pflicht).
+- **Impressum**: Link im Footer führt noch ins Leere (gesetzlich Pflicht).
+- **Datenschutzerklärung** (`datenschutz.html`) vor dem Livegang prüfen:
+  Name des Inhabers, Hosting-Anbieter innerhalb der EU wählen und mit ihm
+  einen Auftragsverarbeitungsvertrag schließen, Server-Protokolle höchstens
+  14 Tage aufbewahren (Caddy schreibt standardmäßig keine Zugriffsprotokolle).
+  Schriften liegen lokal in `fonts/` — nicht wieder von Google laden.
 - **Hero-Video** hat nur 848 × 352 px — für ein scharfes Bild eine Datei in
   mind. 1080p einsetzen (`images/queens-video.mp4`).
 - **QR-Code** für die Tische auf `https://<domain>/menu/` erzeugen.
