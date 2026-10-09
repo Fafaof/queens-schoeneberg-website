@@ -7,8 +7,8 @@
   <meta name="description" content="Queen's — Kneipe mit Billiard, Jukebox und Kiez-Flair. Ab 18, Raucherlokal.">
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-  <link rel="stylesheet" href="css/fonts.css?v=6">
-  <link rel="stylesheet" href="css/style.css?v=6">
+  <link rel="stylesheet" href="css/fonts.css?v=7">
+  <link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body>
 
@@ -222,9 +222,16 @@
             <p class="anfahrt-note" data-i18n="anfahrt_note">
               U4 Rathaus Schöneberg · S Schöneberg — jeweils rund 5 Minuten zu Fuß.
             </p>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=Hauptstra%C3%9Fe+50%2C+10827+Berlin"
+            <!-- Ziel ist der Google-Eintrag "Queens" (destination_place_id), nicht nur
+                 die Straße: so steht das Lokal mit Namen im Verlauf der Karten-App. -->
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Queens%2C+Hauptstra%C3%9Fe+50%2C+10827+Berlin&destination_place_id=ChIJ9dLfhGlQqEcRM8OJXhHeQU0"
                target="_blank" rel="noopener" class="btn btn--primary anfahrt-cta">
               <span data-i18n="anfahrt_cta">Route planen</span> <span aria-hidden="true">↗</span>
+            </a>
+            <!-- Nur auf Apple-Geräten eingeblendet (js/main.js) -->
+            <a id="apple-maps-link" href="https://maps.apple.com/?daddr=Queens%2C+Hauptstra%C3%9Fe+50%2C+10827+Berlin&dirflg=d"
+               target="_blank" rel="noopener" class="anfahrt-alt" hidden>
+              <span data-i18n="anfahrt_apple">In Apple Karten öffnen</span> <span aria-hidden="true">↗</span>
             </a>
           </div>
         </div>
@@ -316,7 +323,7 @@
     </div>
   </footer>
 
-  <script src="js/vorschau.js?v=6"></script>
-  <script src="js/main.js?v=6"></script>
+  <script src="js/vorschau.js?v=7"></script>
+  <script src="js/main.js?v=7"></script>
 </body>
 </html>

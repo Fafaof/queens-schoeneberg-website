@@ -106,6 +106,7 @@ const translations = {
     en: 'U4 Rathaus Schöneberg · S Schöneberg — each about a 5-minute walk.',
   },
   anfahrt_cta: { de: 'Route planen', en: 'Get Directions' },
+  anfahrt_apple: { de: 'In Apple Karten öffnen', en: 'Open in Apple Maps' },
 
   hours_eyebrow: { de: 'Wann & Wo', en: 'When & Where' },
   hours_title: { de: 'Öffnungszeiten', en: 'Opening Hours' },
@@ -340,4 +341,10 @@ if (bookingForm) {
       bookingButton.disabled = false;
     }
   });
+}
+
+// ---------- Anfahrt: zusätzlicher Link zu Apple Karten nur auf Apple-Geräten ----------
+const appleMapsLink = document.getElementById('apple-maps-link');
+if (appleMapsLink && /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent)) {
+  appleMapsLink.hidden = false;
 }
