@@ -11,6 +11,7 @@ const fs = require('node:fs');
 const fsp = require('node:fs/promises');
 const path = require('node:path');
 const crypto = require('node:crypto');
+const { sendMail, loadMailConfig } = require('./mail.js');
 
 const ROOT = path.resolve(__dirname, '..');
 const DATA_DIR = path.join(__dirname, 'data');
@@ -133,6 +134,42 @@ async function readRequests() {
   return all.filter((entry) => new Date(entry.received).getTime() >= cutoff);
 }
 
+// Meldet eine neue Anfrage per E-Mail an den Wirt und bestätigt dem Gast den
+// Eingang. Läuft nebenher: schlägt der Versand fehl, ist die Anfrage trotzdem
+// gespeichert und in der Verwaltung sichtbar.
+function mailRequest(entry) {
+  const config = loadMailConfig();
+  if (!config) return;
+  const [year, month, day] = entry.date ? entry.date.split('-') : [];
+  const details = [
+    `Name: ${entry.name}`,
+    `E-Mail: ${entry.email}`,
+    `Anliegen: ${entry.subject || '-'}`,
+    entry.date ? `Datum: ${day}.${month}.${year}` : null,
+    entry.people ? `Personen: ${entry.people}` : null,
+  ].filter(Boolean).join('\n');
+  const report = (who) => (error) => console.error(`E-Mail an ${who} nicht verschickt: ${error.message}`);
+
+  if (config.notifyTo) {
+    sendMail({
+      to: config.notifyTo,
+      replyTo: entry.email, // "Antworten" geht direkt an den Gast
+      subject: `Neue Anfrage von ${entry.name}`,
+      text: `${details}\n\nNachricht:\n${entry.message}\n\nZum Antworten einfach auf diese E-Mail antworten.`,
+    }, config).catch(report('den Wirt'));
+  }
+  // Bewusst ohne den Text des Gastes: so lässt sich das Formular nicht
+  // missbrauchen, um über uns beliebige Inhalte an fremde Adressen zu schicken.
+  if (config.confirmGuest) {
+    sendMail({
+      to: entry.email,
+      replyTo: config.notifyTo || config.from,
+      subject: "Deine Anfrage ist bei uns angekommen — Queen's",
+      text: `Hallo ${entry.name},\n\ndanke für deine Anfrage! Sie ist bei uns angekommen.\n\nBitte beachte: Das ist noch keine Bestätigung deiner Reservierung. Wir melden uns so schnell wie möglich persönlich bei dir.\n\nBis bald im Queen's\nHauptstraße 50, 10827 Berlin\nTelefon 030 76770557\n\n—\nThis is an automatic confirmation that we received your request. It is not yet a confirmed reservation — we will get back to you personally.`,
+    }, config).catch(report('den Gast'));
+  }
+}
+
 // ---------- Anmeldung ----------
 function hashPassword(password, salt = crypto.randomBytes(16).toString('hex')) {
   const hash = crypto.scryptSync(password, salt, 64).toString('hex');
@@ -247,9 +284,10 @@ async function handleApi(req, res, url) {
     const entry = {
       id: crypto.randomBytes(8).toString('hex'),
       received: new Date().toISOString(),
-      name: clean(body.name, 120).trim(),
+      // einzeilige Felder: Zeilenumbrüche raus
+      name: clean(body.name, 120).replace(/\s+/g, ' ').trim(),
       email: clean(body.email, 160).trim(),
-      subject: clean(body.subject, 60).trim(),
+      subject: clean(body.subject, 60).replace(/\s+/g, ' ').trim(),
       date: clean(body.date, 10),
       people: clean(body.people, 3),
       message: clean(body.message, 3000).trim(),
@@ -261,6 +299,7 @@ async function handleApi(req, res, url) {
     const all = await readRequests();
     all.unshift(entry);
     await writeJson(FILES.requests, all.slice(0, 500));
+    mailRequest(entry);
     return send(res, 200, { ok: true });
   }
 

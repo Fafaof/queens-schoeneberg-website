@@ -40,15 +40,31 @@ gesperrt, Zugang nur mit Passwort (8 Fehlversuche in 15 Minuten, dann Sperre).
 - **Kiez-Beiträge**: Überschrift, Datum, Text und optional ein Foto;
   „Veröffentlichen“ stellt den Beitrag sofort online. Fotos werden im Browser
   auf max. 1600 px verkleinert.
-- **Anfragen**: Alles aus dem Formular „Tisch reservieren“. Es wird (noch)
-  **keine E-Mail** verschickt — der Wirt sieht die Anfragen hier und antwortet
-  per Tipp auf die E-Mail-Adresse.
+- **Anfragen**: Alles aus dem Formular „Tisch reservieren“. Mit
+  eingerichtetem E-Mail-Versand (siehe unten) bekommt der Wirt zusätzlich
+  eine Mail und der Gast eine Eingangsbestätigung.
 
 Neue Kategorien lassen sich in der Verwaltung nicht anlegen. Welche Kategorie
 zu welcher der sechs großen Kacheln gehört, steht in `menu/menu.js` im
 `GROUPS`-Array; dort auch die Banner-Bilder.
 
 Passwort ändern: auf dem Server `node server/set-password.js` (gilt sofort).
+
+## E-Mail-Versand einrichten
+
+```
+node server/set-mail.js      # fragt die Zugangsdaten ab und schickt eine Testmail
+```
+
+Am besten bei All-Inkl ein **eigenes Postfach nur für die Website** anlegen
+(z.B. `reservierung@queensberlin.de`) — dann muss niemand das Passwort des
+normalen Postfachs herausgeben. Gespeichert wird nur in
+`server/data/mail.json` auf dem Server. Wird das Passwort des Postfachs
+geändert, `set-mail.js` erneut aufrufen; bis dahin bleiben Anfragen in der
+Verwaltung sichtbar, es gehen nur keine Mails raus (Fehler stehen im
+Server-Protokoll: `journalctl -u queens`). Verschickt wird über Port 465
+(SSL/TLS). Danach in `datenschutz.html` den vorbereiteten Absatz zur
+Eingangsbestätigung einkommentieren.
 
 ## Online stellen (VPS, z.B. Ubuntu 24.04)
 
