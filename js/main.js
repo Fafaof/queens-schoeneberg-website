@@ -220,11 +220,11 @@ highlightTabs.forEach((tab) => {
   });
 });
 
-document.addEventListener('click', (event) => {
-  if (activeHighlightTab && !highlightPanelWrap.contains(event.target)) {
-    closeHighlightPanel();
-  }
-});
+// Beim Laden ist das dritte Kästchen (Getränke) schon aufgeklappt: so sieht man
+// beim Runterscrollen sofort, dass sich die Kästchen antippen lassen. Deshalb
+// schließt ein Klick irgendwo anders auf der Seite das Panel auch nicht mehr —
+// zu geht es nur noch per Tipp auf das aktive Kästchen.
+if (highlightTabs.length >= 3) openHighlightPanel(highlightTabs[2]);
 
 // ---------- Atmosphäre-Galerie: echtes 3D-Riesenrad gekoppelt an den Scroll ----------
 // Die Achse liegt waagerecht (links-rechts), wie bei einem echten Riesenrad
