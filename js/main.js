@@ -113,8 +113,8 @@ const translations = {
   day_fri_sat: { de: 'Fr – Sa', en: 'Fri – Sat' },
   day_sun: { de: 'So', en: 'Sun' },
   hours_note: {
-    de: 'Platzhalter — bitte tatsächliche Öffnungszeiten eintragen.',
-    en: 'Placeholder — please enter actual opening hours.',
+    de: 'Täglich ab 12 Uhr mittags bis in den Morgen.',
+    en: 'Open daily from noon until the early morning.',
   },
   tripadvisor_cta: { de: 'Bewertungen auf TripAdvisor', en: 'Reviews on TripAdvisor' },
 
