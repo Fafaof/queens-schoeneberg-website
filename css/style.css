@@ -190,6 +190,7 @@ h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
 /* ---------- Hero ---------- */
 .hero {
   position: relative;
+  background: #16120d;
   min-height: 88vh;
   display: flex;
   align-items: flex-end;
@@ -223,7 +224,14 @@ h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
   inset: 0;
   background: linear-gradient(180deg, rgba(70, 32, 10, 0.16) 0%, rgba(48, 22, 8, 0.34) 50%, rgba(22, 30, 20, 0.9) 100%);
 }
-.hero-media__video { filter: contrast(1.06) saturate(1.2) sepia(0.18); }
+/* Kein Standbild vor dem Video: es bleibt unsichtbar, bis das erste Bild
+   geladen ist (js/main.js setzt .is-ready), und blendet dann weich ein. */
+.hero-media__video {
+  filter: contrast(1.06) saturate(1.2) sepia(0.18);
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+.hero-media__video.is-ready { opacity: 1; }
 .hero-logo { margin: 0 0 0.35em; line-height: 0; }
 .hero-logo img {
   width: clamp(220px, 52vw, 400px);
@@ -302,7 +310,7 @@ h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
   .hero { align-items: center; --px: 0; --py: 0; }
   .hero-media__video {
     transform: scale(1.05) translate(calc(var(--px) * -10px), calc(var(--py) * -8px));
-    transition: transform 0.6s ease-out;
+    transition: transform 0.6s ease-out, opacity 0.7s ease;
   }
   .hero-overlay {
     background:

@@ -348,3 +348,14 @@ const appleMapsLink = document.getElementById('apple-maps-link');
 if (appleMapsLink && /iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent)) {
   appleMapsLink.hidden = false;
 }
+
+// ---------- Hero-Video erst zeigen, wenn das erste Bild da ist (kein Standbild-Wechsel) ----------
+const heroVideo = document.querySelector('.hero-media__video');
+if (heroVideo) {
+  const showHeroVideo = () => heroVideo.classList.add('is-ready');
+  if (heroVideo.readyState >= 2) showHeroVideo();
+  else {
+    heroVideo.addEventListener('loadeddata', showHeroVideo, { once: true });
+    heroVideo.addEventListener('playing', showHeroVideo, { once: true });
+  }
+}
